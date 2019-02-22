@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-blob-secret
+type: Opaque
+data:
+  ACCOUNT_NAME: loeppik8sbackup
+  ACCOUNT_KEY: xxxxxx
+  CONTAINER_NAME: k8sbackup
+---
+#kubectl create configmap azure-blob-config --from-file=config.yml

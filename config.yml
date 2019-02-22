@@ -1,0 +1,4 @@
+k8s-backup-config:
+  Backup_Dir: "/var/www/html/wp-content/updraft"
+  Filter: "backup_.*"
+  Blob_Folder: "wordpress"

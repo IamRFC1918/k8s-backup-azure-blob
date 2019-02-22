@@ -1,0 +1,1 @@
+1 20 * * * root python3 /app/backup.py > /proc/1/fd/1 2>/proc/1/fd/2
