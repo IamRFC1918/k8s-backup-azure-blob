@@ -60,4 +60,4 @@ filteredfiles = getfiles(config_folder, config_filter)
 blobs = getblobs(block_blob_service, container_name)
 for file in filteredfiles:
     uploadFiles(config_folder, file, block_blob_service, container_name, config_blob_folder, blobs)
-deletedFiles = deleteFiles(block_blob_service, blobs, container_name, retention_days)
+deleteFiles(block_blob_service, blobs, container_name, retention_days)
