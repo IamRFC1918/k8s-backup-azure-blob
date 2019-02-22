@@ -1,4 +1,6 @@
 k8s-backup-config:
-  Backup_Dir: "/var/www/html/wp-content/updraft"
+  #Backup_Dir: "/var/www/html/wp-content/updraft"
+  Backup_Dir: '/Users/loeppi/Downloads'
   Filter: "backup_.*"
   Blob_Folder: "wordpress"
+  retention_days: 30
