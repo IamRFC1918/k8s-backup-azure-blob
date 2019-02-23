@@ -1,8 +1,4 @@
 // Powered by Infostretch 
-environment {
-        REG_PASSWORD     = credentials('RegistryPassword')
-    }
-    
 timestamps {
 
 node () {
@@ -12,6 +8,9 @@ node () {
 	}
 	stage ('azure-blob-sidecar - Build') {
 
+withCredentials([string(credentialsId: 'RegistryPassword', variable: 'PW1')]) {
+    echo "My password is '${PW1}'!"
+}
 sh """ 
 docker build --no-cache --tag k8s-backup-azure-blob:latest . 
  """		// Shell build step
