@@ -1,5 +1,9 @@
 // Powered by Infostretch 
 
+pipeline{
+    environment {
+        REG_PASSWORD     = credentials('RegistryPassword')
+    }
 timestamps {
 
 node () {
@@ -8,10 +12,6 @@ node () {
  	 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '75b43bf6-74d1-4ca2-9cda-3490a5a616ee', url: 'https://git.frank-loeppert.com/floeppert/k8s-backup-azure-blob.git']]]) 
 	}
 	stage ('azure-blob-sidecar - Build') {
-        
-environment {
-        REG_PASSWORD     = credentials('RegistryPassword')
-    }
 
 sh """ 
 docker build --no-cache --tag k8s-backup-azure-blob:latest . 
@@ -32,5 +32,6 @@ sh """
 docker image rm hub.frank-loeppert.com/k8s-backup-azure-blob:latest -f 
  """ 
 	}
+}
 }
 }
