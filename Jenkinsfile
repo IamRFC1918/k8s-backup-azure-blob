@@ -1,9 +1,8 @@
 // Powered by Infostretch 
-
-pipeline{
-    environment {
+environment {
         REG_PASSWORD     = credentials('RegistryPassword')
     }
+    
 timestamps {
 
 node () {
@@ -32,6 +31,5 @@ sh """
 docker image rm hub.frank-loeppert.com/k8s-backup-azure-blob:latest -f 
  """ 
 	}
-}
 }
 }
