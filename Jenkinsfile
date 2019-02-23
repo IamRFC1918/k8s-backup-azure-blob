@@ -8,18 +8,17 @@ node () {
 	}
 	stage ('azure-blob-sidecar - Build') {
 
-withCredentials([string(credentialsId: 'RegistryPassword', variable: 'PW1')]) {
-    echo "My password is '${PW1}'!"
-}
 sh """ 
 docker build --no-cache --tag k8s-backup-azure-blob:latest . 
  """		// Shell build step
 sh """ 
 docker tag k8s-backup-azure-blob:latest hub.frank-loeppert.com/k8s-backup-azure-blob:latest 
  """		// Shell build step
+withCredentials([string(credentialsId: 'RegistryPassword', variable: 'REG_PASSWORD')]) {
 sh """ 
-docker login -u hub -p $REG_PASSWORD hub.frank-loeppert.com 
+docker login -u hub -p ${REG_PASSWORD} hub.frank-loeppert.com 
  """		// Shell build step
+ }
 sh """ 
 docker push hub.frank-loeppert.com/k8s-backup-azure-blob:latest 
  """		// Shell build step
