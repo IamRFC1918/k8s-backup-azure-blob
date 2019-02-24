@@ -10,8 +10,7 @@ account_key = os.environ['ACCOUNT_KEY']
 container_name = os.environ['CONTAINER_NAME']
 
 #Import ConfigMap
-#with open('/config/config.yml') as f:
-with open('config.yml') as f:
+with open('/config/blob-config.yml') as f:
     config = yaml.load(f)
 
 config_folder = config['k8s-backup-config']['Backup_Dir']
