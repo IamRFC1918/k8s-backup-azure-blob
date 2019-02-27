@@ -9,10 +9,10 @@ node () {
 	stage ('azure-blob-sidecar - Build') {
 
 sh """ 
-docker build --no-cache --tag k8s-backup-azure-blob:latest . 
+docker build --no-cache --tag k8s-backup-azure-blob:2.0 . 
  """		// Shell build step
 sh """ 
-docker tag k8s-backup-azure-blob:latest hub.frank-loeppert.com/k8s-backup-azure-blob:latest 
+docker tag k8s-backup-azure-blob:2.0 hub.frank-loeppert.com/k8s-backup-azure-blob:2.0 
  """		// Shell build step
 withCredentials([string(credentialsId: 'RegistryPassword', variable: 'REG_PASSWORD')]) {
 sh """ 
@@ -20,13 +20,13 @@ docker login -u hub -p ${REG_PASSWORD} hub.frank-loeppert.com
  """		// Shell build step
  }
 sh """ 
-docker push hub.frank-loeppert.com/k8s-backup-azure-blob:latest 
+docker push hub.frank-loeppert.com/k8s-backup-azure-blob:2.0 
  """		// Shell build step
 sh """ 
 docker image rm k8s-backup-azure-blob -f 
  """		// Shell build step
 sh """ 
-docker image rm hub.frank-loeppert.com/k8s-backup-azure-blob:latest -f 
+docker image rm hub.frank-loeppert.com/k8s-backup-azure-blob:2.0 -f 
  """ 
 	}
 }
