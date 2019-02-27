@@ -9,6 +9,11 @@ account_name = os.environ['ACCOUNT_NAME']
 account_key = os.environ['ACCOUNT_KEY']
 container_name = os.environ['CONTAINER_NAME']
 
+account_name = account_name[:-2]
+account_key = account_key[:-2]
+container_name = container_name[:-2]
+
+
 #Import ConfigMap
 with open('/config/blob-config.yml') as f:
     config = yaml.load(f)
@@ -65,4 +70,4 @@ filteredfiles = getfiles(config_folder, config_filter)
 blobs = getblobs(block_blob_service, container_name)
 for file in filteredfiles:
     uploadFiles(config_folder, file, block_blob_service, container_name, config_blob_folder, blobs)
-deleteFiles(block_blob_service, blobs, container_name, retention_days)
+#deleteFiles(block_blob_service, blobs, container_name, retention_days)
