@@ -7,6 +7,6 @@ ADD backup-cron /etc/cron.d/backup-cron
 RUN chmod 0644 /etc/cron.d/backup-cron
 RUN crontab /etc/cron.d/backup-cron
 WORKDIR /app
-COPY ./ /
+ADD backup.py /app/backup.py
 CMD ["cron", "-f"]
 #CMD [ "python3", "./backup.py"]
