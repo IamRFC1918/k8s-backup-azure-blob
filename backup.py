@@ -35,13 +35,19 @@ def getblobs(connection, container):
 def uploadFiles(folder, file, connection, container, prefix, blobs):
     blobpath = prefix + '/' + file
     source_file = os.path.join(folder, file)
-    #Test if file is already there
-    if blobpath in blobs.items:
-        print(blobpath + " is already uploaded")
-    else:
-    #Upload File
+    # Test if there is no File in blobs
+    if len(blobs.items) == 0:
+        #Upload File
         connection.create_blob_from_path(container, blobpath, source_file)
         print("Will now upload blob " + blobpath)
+    else:
+        #Test if file is already there
+        if blobpath in blobs.items:
+            print(blobpath + " is already uploaded")
+        else:
+        #Upload File
+            connection.create_blob_from_path(container, blobpath, source_file)
+            print("Will now upload blob " + blobpath)
 
 #Erase Files older than specified in config
 def deleteFiles(connection, blobs, container, retention):
