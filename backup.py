@@ -32,7 +32,7 @@ def getblobs(connection, container):
     return blobs
 
 #Upload Files
-def uploadFiles(folder, file, connection, container, prefix, blobs):
+def uploadFiles(folder, file, connection, container, prefix, blobs, existendblobs):
     blobpath = prefix + '/' + file
     source_file = os.path.join(folder, file)
     # Test if there is no File in blobs
@@ -42,7 +42,7 @@ def uploadFiles(folder, file, connection, container, prefix, blobs):
         print("Will now upload blob " + blobpath)
     else:
         #Test if file is already there
-        if blobpath in blobs.items:
+        if blobpath in existendblobs:
             print(blobpath + " is already uploaded")
         else:
         #Upload File
@@ -63,6 +63,9 @@ block_blob_service = azure.storage.blob.BlockBlobService(account_name=account_na
 # Filter Files
 filteredfiles = getfiles(config_folder, config_filter)
 blobs = getblobs(block_blob_service, container_name)
+existendblobs = []
+for blob in blobs:
+    existendblobs.append(blob.name)
 for file in filteredfiles:
-    uploadFiles(config_folder, file, block_blob_service, container_name, config_blob_folder, blobs)
+    uploadFiles(config_folder, file, block_blob_service, container_name, config_blob_folder, blobs, existendblobs)
 #deleteFiles(block_blob_service, blobs, container_name, retention_days)
