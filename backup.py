@@ -9,11 +9,6 @@ account_name = os.environ['ACCOUNT_NAME']
 account_key = os.environ['ACCOUNT_KEY']
 container_name = os.environ['CONTAINER_NAME']
 
-account_name = account_name[:-2]
-account_key = account_key[:-2]
-container_name = container_name[:-2]
-
-
 #Import ConfigMap
 with open('/config/blob-config.yml') as f:
     config = yaml.load(f)
